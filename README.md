@@ -1,4 +1,4 @@
-﻿# Order Inventory Management System
+# Order Inventory Management System
 
 A full stack inventory management web application built for small retailers and warehouses.
 
@@ -14,6 +14,11 @@ A full stack inventory management web application built for small retailers and 
 - Dashboard with total products, total value and low stock count
 - REST APIs for all CRUD operations
 - Data persists in MySQL database
+
+## Prerequisites
+Make sure you have these installed before running the project:
+- [Node.js](https://nodejs.org/)
+- [MySQL](https://dev.mysql.com/downloads/installer/)
 
 ## Database Setup
 Run these SQL commands in MySQL:
