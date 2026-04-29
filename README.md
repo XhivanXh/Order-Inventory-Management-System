@@ -23,8 +23,11 @@ Make sure you have these installed before running the project:
 ## Database Setup
 Run these SQL commands in MySQL:
 
+```sql
 CREATE DATABASE inventory_db;
+
 USE inventory_db;
+
 CREATE TABLE products (
     id INT AUTO_INCREMENT PRIMARY KEY,
     name VARCHAR(100),
@@ -33,7 +36,7 @@ CREATE TABLE products (
     quantity INT,
     description TEXT
 );
-
+```
 ## How to Run
 
 ### Backend
