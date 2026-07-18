@@ -34,11 +34,7 @@ db.connect((err) => {
 const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
-// Catch-all route using correct Express v5 wildcard syntax
-app.get('/:splat*', (req, res) => {
+// Catch-all route using correct wildcard syntax
+app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend', 'inventory.html'));
-});
-
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
 });
