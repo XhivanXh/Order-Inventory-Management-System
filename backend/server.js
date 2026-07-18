@@ -17,7 +17,7 @@ const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
 // Catch-all route to serve inventory.html as the homepage
-app.get('*', (req, res) => {
+app.get('/(.*)', (req, res) => {
   res.sendFile(path.join(__dirname, '../frontend', 'inventory.html'));
 });
 
