@@ -1,28 +1,44 @@
 const express = require('express');
+const mysql = require('mysql2');
+const path = require('path');
 const cors = require('cors');
-const path = require('path'); 
 require('dotenv').config();
 
 const app = express();
+const PORT = process.env.PORT || 5000;
 
-// Middleware
 app.use(cors());
 app.use(express.json());
 
-// Serve the static frontend files from the sibling directory
+// Serve static frontend assets
 app.use(express.static(path.join(__dirname, '../frontend')));
 
-// Routes
+// Database connection
+const db = mysql.createConnection({
+    host: process.env.MYSQLHOST,
+    user: process.env.MYSQLUSER,
+    password: process.env.MYSQLPASSWORD,
+    database: process.env.MYSQLDATABASE,
+    port: process.env.MYSQLPORT || 3306
+});
+
+db.connect((err) => {
+    if (err) {
+        console.error('Database connection failed: ' + err.stack);
+        return;
+    }
+    console.log('Connected to MySQL database.');
+});
+
+// Import API routes
 const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
-// Catch-all route to serve inventory.html as the homepage
-app.get('/(.*)', (req, res) => {
-  res.sendFile(path.join(__dirname, '../frontend', 'inventory.html'));
+// Catch-all route using correct Express v5 wildcard syntax
+app.get('/:splat*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../frontend', 'inventory.html'));
 });
 
-// Start server
-const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+    console.log(`Server running on port ${PORT}`);
 });
