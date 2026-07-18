@@ -35,6 +35,6 @@ const productRoutes = require('./routes/products');
 app.use('/api/products', productRoutes);
 
 // Catch-all route using correct wildcard syntax
-app.get('*', (req, res) => {
+app.get('/*splat', (req, res) => {
     res.sendFile(path.join(__dirname, '../frontend', 'inventory.html'));
 });
